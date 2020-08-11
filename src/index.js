@@ -1,8 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {createStore ,combineReducers} from 'redux';
+import {Provider} from 'react-redux';
+
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+
+import{course,student} from './store/reducers/index'
+
+const rootReducers = combineReducers({
+   courseState:course,
+   studentState:student
+})
+
+const store = createStore(rootReducers);
 
 ReactDOM.render(
   <React.StrictMode>

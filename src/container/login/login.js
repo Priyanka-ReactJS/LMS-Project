@@ -1,5 +1,4 @@
- import { Button, FormGroup, FormControl , Label    } from "react-bootstrap";
- import {Input} from '../../component';
+ import { Button, FormGroup, FormControl    } from "react-bootstrap";
  import React, { useState } from "react";
 
 
