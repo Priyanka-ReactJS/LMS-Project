@@ -27,7 +27,7 @@ const Student = () => {
   city: 'Bramton',
 }
    ])
-  const [originallistOfStudent, setOriginallistOfStudent] = useState([{
+  const [originallistOfStudent] = useState([{
     id:1,
     studentName: 'Priyanka',
     userId: 123,

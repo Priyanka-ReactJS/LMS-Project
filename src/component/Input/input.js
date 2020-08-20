@@ -3,7 +3,7 @@
 
  import {InputGroup,FormControl} from '../Bootstrapwrap/bootstrapwrap'
   
- const Input =({text,autoFocus,onChange,name,value})=>{
+ const Input =({text,autoFocus,onChange,name,value,type})=>{
      return(
   
      <InputGroup className="mb-3">
@@ -17,7 +17,8 @@
          autoFocus={autoFocus}
          onChange={onChange}
          name={name}
-         value={value}
+         type={type}
+         value={value || ''}
        />
      </InputGroup> 
      )

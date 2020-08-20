@@ -13,14 +13,14 @@ const Modalwrap = ({title,lgShow, setLgShow , children , submit , editSubmitCour
         onHide={() => setLgShow(false)}
         aria-labelledby="example-modal-sizes-title-lg"
       >
-            <Modal.Header closeButton>
-      <Modal.Title id="example-modal-sizes-title-lg">
-    {title}
-      </Modal.Title>
+    <Modal.Header closeButton>
+    <Modal.Title id="example-modal-sizes-title-lg">
+      {title}
+    </Modal.Title>
     </Modal.Header>
-    <Modal.Body>
-    {children}  {/*course->craete*/}
-    </Modal.Body>
+        <Modal.Body>
+        {children}  {/*course->craete*/}
+        </Modal.Body>
     <Modal.Footer>
       <PrimaryButton text="Submit" onClick={isCreate ? submit : editSubmitCourse} />
       <SecondButton text="Close" onClick={() => setLgShow(false)}/>

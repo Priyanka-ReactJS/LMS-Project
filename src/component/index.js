@@ -6,6 +6,7 @@ import Dropdownwrap from './Dropdown/dropdown';
 import Modalwrap from './Modal/modal';
 import TableWrap from '../component/Table/table';
 import TableCourse from '../component/TableCourse/tableCourse'
+import Loader from './Loader/loader';
 
 export{
     Input,
@@ -16,4 +17,5 @@ export{
     Modalwrap,
     TableWrap,
     TableCourse,
+    Loader,
 }

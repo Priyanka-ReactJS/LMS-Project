@@ -3,7 +3,6 @@ import {FormControl ,Dropdown, InputGroup, DropdownButton } from '../Bootstrapwr
 
 const Dropdownwrap = ({setSelectValue , options , title ,name , onChange,value,}) => {
   const dropdownValues = options.filter(option => option.id === value)
-   console.log('dropdownValues',dropdownValues)
   const [dropdownValue,setdropdownValue]= useState((dropdownValues[0] ||[]).name);
 
   const handleClick = (e) => {

@@ -2,7 +2,7 @@ import React from 'react'
 import { Navbar, Nav, Form, FormControl } from '../Bootstrapwrap/bootstrapwrap'
 
 
-const Navbarwrap = ({setIsAuthenticated,setCurrentPage}) => {
+const Navbarwrap = ({setCurrentPage}) => {
   return (
     <Navbar bg="primary" variant="dark">
       <Navbar.Brand href="#home">Navbar</Navbar.Brand>
@@ -14,7 +14,7 @@ const Navbarwrap = ({setIsAuthenticated,setCurrentPage}) => {
       <Form inline>
         <FormControl type="text" placeholder="Search" className="mr-sm-2" />  
       </Form>
-      <Nav.Link href="/" style={{"color": "white"}} onClick={()=>setIsAuthenticated(false)}>Logout</Nav.Link>
+      <Nav.Link href="/" style={{"color": "white"}}>Logout</Nav.Link>
        </Navbar>
   )
 }

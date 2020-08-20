@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Input, Dropdownwrap } from '../../../component'
 
 const Create = ({ setNewCourse, newCourse }) => {
-    console.log("edited course", newCourse)
     const [categoryId, setCategoryId] = useState(newCourse.catagory || 0);
     const [course, setCourse] = useState(newCourse || {});
 
