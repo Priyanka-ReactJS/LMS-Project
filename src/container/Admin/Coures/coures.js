@@ -47,15 +47,14 @@ const Course = () => {
     setNewCourse(course)
     setIsCreate(false)
   }
-  const editCreateCourse = () => {
-    setLgShow(!lgShow)
-    setNewCourse({})
-  }
+  
   return (
     <div>
 
       Course <br></br>
-      <PrimaryButton text="Create New Courses" onClick={editCreateCourse}/>
+      <PrimaryButton text="Create New Courses" onClick={() => setLgShow(!lgShow)}/>
+      <div style={{ "width": "500px" }}>
+     </div>
       <CourseList listOfCourse={listOfCourse} onClick={(course) => editCourse(course)}/>
       <Modalwrap isCreate={isCreate} editSubmitCourse={editSubmitCourse} title="Craete New Courses" submit={submit} lgShow={lgShow} setLgShow={setLgShow}>
       <Create newCourse={newCourse} setNewCourse={setNewCourse}/>
@@ -65,4 +64,4 @@ const Course = () => {
 
   )
 }
-export default withRequiredAuth(withErrorHandler(Course,axios));
+export default withErrorHandler(Course,axios);

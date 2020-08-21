@@ -1,60 +1,70 @@
 import React ,{useState} from 'react'
 import {useDispatch ,useSelector} from 'react-redux'
+import {Redirect} from 'react-router-dom'
+
 import '../login/login.css'
 import {Input, Loader , SecondaryButton , PrimaryButton} from '../../component'
 import {auth} from '../../store/action/auth'
+import useForm from '../../Costomehook/useForm'
+import loginFormValidate from '../../Helper/loginFormvalidation'
+import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler'
+import axios from 'axios';
+const Login = () => {
+  const [isSignUp, setIsSignUp] = useState(true);
 
-
-const Login = ({setIsAuthenticated}) => {
-  const[userName , setUserName] = useState('');
-  const [password , setPassword] = useState('');
-  const [isSignup , setIsSignup] = useState(true);  
-
-  const resetValue = () => {
-    return {
-      userName : "",
-      password : ""
-    }
+  const submitForm = () => {
+    dispatch(auth({ email: values.userName, password: values.password }, false))
   }
-    const dispatch = useDispatch();
-    const loading = useSelector(state => state.authState.loading);
-    console.log("auth..." ,auth)
+
+  const { values, errors, handleInputChange, handleSubmit } = useForm(submitForm, loginFormValidate);
+
+  const dispatch = useDispatch();
+
+  const loading = useSelector(state => state.authState.loading);
+  const isAuthenticated = useSelector(state => state.authState.isAuthenticated);
+
    
     return (
-        <div className = 'Login'>
+        <div className = "Login">
+
+          {isAuthenticated && <Redirect to ="/"/>}
+
           {loading && <Loader/>}
-                 {isSignup?
+                 {isSignUp?
                  <h1>Please Login</h1>  :  <h1>Please Sign Up</h1>
-                 }              
-                <Input text="User Name" value = {userName} autoFocus={true} onChange = {(e) => setUserName(e.target.value)}/>
-                <Input text="Password" type="password" value={password} onChange = {(e) => setPassword(e.target.value)}/>
+                 }
+                 <Input name="userName" text="User Name" value={values.userName} autoFocus={true} onChange={handleInputChange} />          
+                 {errors.userName && <label>{errors.userName}</label>}
+
+                 <Input name="password" text="Password" value={values.password} onChange={handleInputChange} />
+                 {errors.password && <label>{errors.password}</label>}
                 {/* <Input value="" name="userName" text="User Name" autoFocus={true} onChange={() => {}} /> */}
                
                {
-                 !isSignup?
-                <PrimaryButton text="Sign Up" onClick={()=> { dispatch(auth({email: userName,password: password},true))}}/>
+                 !isSignUp?
+                <PrimaryButton text="Sign Up" onClick={()=> { dispatch(auth({email: values.userName,password:  values.password},false))}}/>
                 :
-                <PrimaryButton text="Login" onClick={()=> { dispatch(auth({email: userName,password: password},false))}}/>
+                <PrimaryButton text="Login" onClick={handleSubmit}/>
                }
-                <SecondaryButton text = "Reset"  onClick={()=> {resetValue()}} />
+                <SecondaryButton text = "Reset"  />
                 <br></br>
-                {isSignup?
+                {isSignUp?
                 <h>Don't have an account?</h> 
                 :
                 <h>Do you have an account?</h>
                 }
                 {
-                  isSignup?
-                <a href="#" class="ml-2" onClick={()=> { setIsSignup(!isSignup)}} >Sign Up</a>
+                  isSignUp?
+                <a href="#" class="ml-2" onClick={()=> { setIsSignUp(!isSignUp)}} >Sign Up</a>
                 :
-                <a href="#" class="ml-2" onClick={()=> { setIsSignup(!isSignup)}} >Login</a>
+                <a href="#" class="ml-2" onClick={()=> { setIsSignUp(!isSignUp)}} >Login</a>
                 }
 					</div>
             
        
     )
 }
-export default Login;
+export default withErrorHandler(Login, axios)
  
  
 /* import { Button, FormGroup, FormControl    } from "react-bootstrap";

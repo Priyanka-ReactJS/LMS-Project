@@ -9,7 +9,7 @@ const withErrorHandler = (WrapedComponent, axios) => {
         const[error,setError] = useState(null);
 
         useEffect(() => {
-            const reqInterc = axios.interceptors.request.use(req => req, (req) => {
+            const reqInterc = axios.interceptors.request.use(req => {
                 setError(null)
                 console.log("request...", req);
                 return req   
@@ -22,8 +22,8 @@ const withErrorHandler = (WrapedComponent, axios) => {
                 
             })     
             return () => {
-               axios.interceptors.eject(reqInterc) ; //it is for clear memories
-               axios.interceptors.eject(resInterc); //it is for clear memories
+               axios.interceptors.request.eject(reqInterc) ; //it is for clear memories
+               axios.interceptors.response.eject(resInterc); //it is for clear memories
             }
         }, [])
         const handelErrorConfrimation = () => {

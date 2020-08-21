@@ -1,4 +1,5 @@
 import * as actionType from './type';
+import {Redirect} from 'react-router-dom'
 import axios from 'axios';
 
 export const auth = (credentials , isSignUp) => {
@@ -16,15 +17,16 @@ export const auth = (credentials , isSignUp) => {
         dispatch(authStart());
         axios.post(url,
         credentials).then(response => {
-            console.log('auth response' ,response);
+            
             localStorage.setItem('token',response.data.idToken);
             localStorage.setItem('userId',response.data.localId);
             localStorage.setItem('expirationDate',new Date(new Date().getTime() + response.data.expiresIn * 1000));
 
             dispatch(authSuccess(response.data)); 
+           
         }).catch(error => {
             console.log("auth error" , error);
-            dispatch(authFailure())
+            dispatch(authFailure(error))
         })
         dispatch(authStart());
     }
@@ -35,6 +37,17 @@ export const authStart = () => {
 export const authSuccess = (authData) => {
     return {type: actionType.AUTH_SAVE_SUCCESS , value : authData}
 }
-export const authFailure = () => {
-    return {type: actionType.AUTH_SAVE_FAILURE}
+export const authFailure = (error) => {
+    return {type: actionType.AUTH_SAVE_FAILURE , value : error}
+} 
+
+export const logout = () => {
+    return dispatch => {
+        localStorage.clear();
+        dispatch(authLogout());
+
+    }
+}
+export const authLogout = () => {
+    return {type: actionType.AUTH_LOGOUT}
 }

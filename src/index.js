@@ -7,7 +7,7 @@ import thunk from  'redux-thunk'
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-
+import {BrowserRouter} from 'react-router-dom';
 import{course,student ,auth} from './store/reducers/index';
 
 const rootReducers = combineReducers({
@@ -22,9 +22,11 @@ const store = createStore(rootReducers , composeEnhancers(applyMiddleware(thunk)
 
 ReactDOM.render(
   <Provider store= {store}>
+    <BrowserRouter>
   <React.StrictMode>
     <App />
   </React.StrictMode>
+  </BrowserRouter>
   </Provider>,
   document.getElementById('root')
 );

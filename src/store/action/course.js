@@ -55,14 +55,21 @@ export const fetchCourseStart = () => {
     return { type: actionType.COURSE_SAVE_FAILURE }
   }
   
-  export const fetchCourses = () => {
+  export const  fetchCourses = () => {
     return dispatch => {
       dispatch(fetchCourseStart());
   
-      axios.get(`https://recat-redux-lms.firebaseio.com/course.json?hgkkkkkkkkkkkkkkkkkk-auth=${localStorage.getItem('token')}`)
+      axios.get('https://recat-redux-lms.firebaseio.com/course.json?auth=' + localStorage.getItem('token'))
         .then(response => {
 
-          dispatch(fetchCourseSuccess());
+          let courseList = [];
+          const courseResult = response.data;
+  
+          Object.keys(courseResult).map(key => {
+            console.log("keys...", key);
+            courseList.push({ key: key, ...courseResult[key].course });
+          })
+          dispatch(fetchCourseSuccess(courseList));
         })
         .catch(error => {
           dispatch(fetchCourseFailure());
