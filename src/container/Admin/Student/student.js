@@ -4,29 +4,23 @@ import Modalwrap from '../../../component/Modal/modal'
 import Createstudent from '../Student/createStudent';
 import StudentList from '../../Admin/Student/studentlist';
 import {Input} from '../../../component'
+import axios from 'axios'
+import { useSelector, useDispatch } from 'react-redux';
+import { SaveStudent } from '../../../store/action/student';
+import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler'
 
 
 const Student = () => {
   const [isCreate , setIsCreate] = useState(true)
   const [lgShow, setLgShow] = useState(false);
   const [contry, setContry] = useState({})
-  const [listOfStudent, setlistOfStudent] = useState([{
-    id:1,
-    studentName: 'Priyanka',
-    userId: 123,
-    password: 456,
-    contry: 'Canada',
-    city: 'Scarborogh',
-  },
-  {
-  id:2,
-  studentName: 'Richa',
-  userId: 1234,
-  password: 4567,
-  contry: 'Canada',
-  city: 'Bramton',
-}
-   ])
+  const [listOfStudent, setlistOfStudent] = useState([])
+  
+  const dispatch = useDispatch();
+
+  const studentRedux = useSelector(state => state.courseState.course);
+
+
   const [originallistOfStudent] = useState([{
     id:1,
     studentName: 'Priyanka',
@@ -47,15 +41,17 @@ const Student = () => {
 
 
   useEffect(() => {
-
-    console.log("newStudent...", contry)
-  }, [contry])
+    setlistOfStudent(studentRedux);
+  }, [studentRedux])
+  //   console.log("newStudent...", contry)
+  // }, [contry])
 
   const submit = () => {
-    const contryArray = [...listOfStudent];
-    contryArray.push(contry)
-    setlistOfStudent(contryArray)
-    console.log(contry)
+    // const contryArray = [...listOfStudent];
+    // contryArray.push(contry)
+    // setlistOfStudent(contryArray)
+    // console.log(contry)
+    dispatch(SaveStudent(contry));
   }
   const editSubmitCourse = () =>{
   const contryArray = listOfStudent.map(city => {
@@ -68,6 +64,7 @@ const Student = () => {
   const editStudent = (contry) => {
     setLgShow(true)
     setContry(contry);
+    setIsCreate(false)
     
     setIsCreate(false)
      
@@ -99,4 +96,4 @@ const Student = () => {
 
   )
 }
-export default Student;
+export default withErrorHandler(Student,axios);

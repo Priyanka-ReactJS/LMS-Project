@@ -6,7 +6,7 @@ import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux';
 import { SaveCourse } from '../../../store/action/course';
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler'
-import withRequiredAuth from '../../../hoc/withRequiredAuth'
+//import withRequiredAuth from '../../../hoc/withRequiredAuth'
 
 
 const Course = () => {

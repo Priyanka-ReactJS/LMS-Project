@@ -1,19 +1,19 @@
-import React ,{ useState } from 'react';
+import React ,{ useEffect } from 'react';
+import {useDispatch , useSelector } from 'react-redux'
+
 import TableWrap from '../../../component/Table/table'
+import {fetchStudent} from '../../../store/action/student'
 
-const StudentList = ({listOfStudent , onClick}) => {
-  //const [student, setStudent] = useState([
-  //   {
-  //     studentName: 'Piya',
-  //     userId: 123,
-  //     password: 456,
-  //     contry: 'Canada',
-  //     city: 'Scarborogh',   
-  //   }
-  // ])
- 
+const StudentList = ({ onClick }) => {
+
    const tableHeader = ['Id' , 'Student Name' , 'User Id' , 'Password' , 'Contry' , 'City' , 'Action' ]
+   const listOfStudent = useSelector(state => state.studentState.student);
+    const dispatch = useDispatch(); 
 
+
+   useEffect(() => {
+    dispatch(fetchStudent());
+}, [])
     return <div>
       <TableWrap tableHeads={tableHeader} tableRows={listOfStudent} onClick = {onClick}/>
     </div>

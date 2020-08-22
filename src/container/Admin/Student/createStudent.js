@@ -2,7 +2,6 @@ import React, { useState ,useEffect } from 'react'
 import { Input, Dropdownwrap } from '../../../component'
 
 const Createstudent = ({setContry , contry}) => {
-    console.log("Edited student",contry)
     const [contryId, setContryId] = useState(contry.contry || 0);
     const [city, setCity] = useState(contry || {});
 
@@ -30,8 +29,7 @@ const Createstudent = ({setContry , contry}) => {
 
     const setCityObject = (key,value) => {
         setCity({ ...city, [key]: value });
-        console.log(key)
-        console.log(value)
+       
     }
     const filterCity = () => {
         return Selectcity.filter(city => city.contryId === contryId)
