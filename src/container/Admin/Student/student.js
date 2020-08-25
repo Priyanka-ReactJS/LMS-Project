@@ -21,23 +21,7 @@ const Student = () => {
   const studentRedux = useSelector(state => state.courseState.course);
 
 
-  const [originallistOfStudent] = useState([{
-    id:1,
-    studentName: 'Priyanka',
-    userId: 123,
-    password: 456,
-    contry: 'Canada',
-    city: 'Scarborogh',
-  },
-  {
-    id:2,
-    studentName: 'Richa',
-    userId: 1234,
-    password: 4567,
-    contry: 'Canada',
-    city: 'Bramton',
-  }
-])
+  const [originallistOfStudent] = useState([])
 
 
   useEffect(() => {
@@ -64,8 +48,6 @@ const Student = () => {
   const editStudent = (contry) => {
     setLgShow(true)
     setContry(contry);
-    setIsCreate(false)
-    
     setIsCreate(false)
      
   }
